@@ -13,12 +13,18 @@ public class ThreeBody : MonoBehaviour
     BodyProperty[] bp;
     private int numberOfSphere = 3;
     TrailRenderer trailRenderer;
+    private float timeflow = 0;
+    float radius = 0.1f;
+    BodyProperty[] b; 
+
     struct BodyProperty // why struct?
     {                   // https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/choosing-between-class-and-struct
         public float mass;
         public Vector3 velocity;
         public Vector3 acceleration;
     }
+
+
 
  
     void Start()
@@ -69,9 +75,30 @@ public class ThreeBody : MonoBehaviour
     {
         // Loop for N-body gravity
         // How should we design the loop?
+
+        timeflow += Time.deltaTime;
         for (int i = 0; i < numberOfSphere; i++)
+            b[i].acceleration = new Vector3(0f, 0f, 0f);
+
+        // how to make them move over the time
+        for(int i = 0; i < numberOfSphere; i++) 
         {
-            // Something
+            for(int j = 0; j < numberOfSphere; j++)
+            {
+                if (i == j)
+                    continue;
+
+
+                //F = G *m1 * m2 / r^2
+                float distance = Vector3.Distance(body[i].transform.position, body[j].transform.position);
+                Vector3 direction = Vector3.Normalize(body[j].transform.position - body[i].transform.position);
+                b[i].acceleration += G * b[j].mass / (distance * distance) * direction;
+                Debug.Log(b[i].acceleration);
+           
+            }
+
+            b[i].velocity += b[i].acceleration * Time.deltaTime;
+            b[i].transform.position += body[i].velocity * Time.deltaTime; 
         }
 
     }
