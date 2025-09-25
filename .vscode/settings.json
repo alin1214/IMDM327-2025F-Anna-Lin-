@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "IMDM327-2024F.sln"
+    "dotnet.defaultSolution": "IMDM327-2024F.sln",
+    "dotnet.preferCSharpExtension": true
 }

@@ -22,9 +22,10 @@ public class ThreeBody : MonoBehaviour
         public float mass;
         public Vector3 velocity;
         public Vector3 acceleration;
+        public float initvel;
+        public string name;
+        public float radius; 
     }
-
-
 
  
     void Start()
@@ -32,6 +33,8 @@ public class ThreeBody : MonoBehaviour
         // Just like GO, computer should know how many room for struct is required:
         bp = new BodyProperty[numberOfSphere];
         body = new GameObject[numberOfSphere];
+
+        //use the chart and create name mass radius and initvelocity for each planet
 
         // Loop generating the gameobject and assign initial conditions (type, position, (mass/velocity/acceleration)
         for (int i = 0; i < numberOfSphere; i++)
@@ -75,30 +78,9 @@ public class ThreeBody : MonoBehaviour
     {
         // Loop for N-body gravity
         // How should we design the loop?
-
-        timeflow += Time.deltaTime;
         for (int i = 0; i < numberOfSphere; i++)
-            b[i].acceleration = new Vector3(0f, 0f, 0f);
-
-        // how to make them move over the time
-        for(int i = 0; i < numberOfSphere; i++) 
         {
-            for(int j = 0; j < numberOfSphere; j++)
-            {
-                if (i == j)
-                    continue;
-
-
-                //F = G *m1 * m2 / r^2
-                float distance = Vector3.Distance(body[i].transform.position, body[j].transform.position);
-                Vector3 direction = Vector3.Normalize(body[j].transform.position - body[i].transform.position);
-                b[i].acceleration += G * b[j].mass / (distance * distance) * direction;
-                Debug.Log(b[i].acceleration);
-           
-            }
-
-            b[i].velocity += b[i].acceleration * Time.deltaTime;
-            b[i].transform.position += body[i].velocity * Time.deltaTime; 
+            // Something
         }
 
     }
