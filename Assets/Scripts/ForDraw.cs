@@ -9,10 +9,10 @@ public class ForDraw : MonoBehaviour
    BodyProperty[] b;
    TrailRenderer[] trails;
    public Material[] material;
-   private int numberOfSphere = 20; // start small, add later
-   private float timeflow = 0.1f;
+   private int numberOfSphere = 100; // start small, add later
+   private float timeflow = 0.5f;
    float radius = 10f;
-   private const float G = 500f;
+   private const float G = 5000f;
 
 
    struct BodyProperty // why struct?
@@ -39,7 +39,7 @@ public class ForDraw : MonoBehaviour
            // initial position
            body[i].transform.position = new Vector3(radius * Mathf.Sin(timeflow * i), // changes the position of every sphere
                                                    radius * Mathf.Cos(timeflow * i),
-                                                   180);
+                                                   timeflow * i);
            // initial color
            var meshRenderer = body[i].GetComponent<Renderer>();
            meshRenderer.material.SetColor("_Color", new Color(i / 255f, (255 - i) / 255f, 255 / 255f));
@@ -47,7 +47,7 @@ public class ForDraw : MonoBehaviour
 
            // trails
            trails[i] = body[i].AddComponent<TrailRenderer>();
-           trails[i].time = 2.0f;                   
+           trails[i].time = 5.0f;                   
            trails[i].startWidth = 0.5f;
            trails[i].endWidth = 0.0f;
            // trails[i].material = new Material(Shader.Find("Sprite/Default"));
@@ -67,7 +67,7 @@ public class ForDraw : MonoBehaviour
 
            // adjust the mass
            b[i].mass = 1f;
-           b[i].velocity = Vector3.zero;
+           // b[i].velocity = Vector3.zero;
            b[i].acceleration = Vector3.zero;
 
 
@@ -114,6 +114,9 @@ public class ForDraw : MonoBehaviour
            body[i].transform.position += b[i].velocity * Time.deltaTime;
        }
 
+
+
+
    }
 }
 
@@ -121,3 +124,4 @@ public class ForDraw : MonoBehaviour
 // internal class constant
 // {
 // }
+

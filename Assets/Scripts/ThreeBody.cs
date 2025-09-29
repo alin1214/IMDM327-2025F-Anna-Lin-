@@ -9,36 +9,24 @@ using UnityEngine.Animations;
 
 public class ThreeBody : MonoBehaviour
 {
-   private const float G = 500f; // Gravity constant https://en.wikipedia.org/wiki/Gravitational_constant
-   GameObject[] body;
-   BodyProperty[] bp;
-   private int numberOfSphere = 3;
-   TrailRenderer trailRenderer;
-   private float timeflow = 0;
-   float radius = 0.1f;
-   BodyProperty[] b;
+    private const float G = 500f; // Gravity constant https://en.wikipedia.org/wiki/Gravitational_constant
+    GameObject[] body;
+    BodyProperty[] bp;
+    private int numberOfSphere = 3;
+    TrailRenderer trailRenderer;
+    struct BodyProperty // why struct?
+    {                   // https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/choosing-between-class-and-struct
+        public float mass;
+        public Vector3 velocity;
+        public Vector3 acceleration;
+    }
 
-
-   struct BodyProperty // why struct?
-   {                   // https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/choosing-between-class-and-struct
-       public float mass;
-       public Vector3 velocity;
-       public Vector3 acceleration;
-       public float initvel;
-       public string name;
-       public float radius;
-   }
-
-
-   void Start()
-   {
-       // Just like GO, computer should know how many room for struct is required:
-       bp = new BodyProperty[numberOfSphere];
-       body = new GameObject[numberOfSphere];
-
-
-       //use the chart and create name mass radius and initvelocity for each planet
-
+ 
+    void Start()
+    {
+        // Just like GO, computer should know how many room for struct is required:
+        bp = new BodyProperty[numberOfSphere];
+        body = new GameObject[numberOfSphere];
 
        // Loop generating the gameobject and assign initial conditions (type, position, (mass/velocity/acceleration)
        for (int i = 0; i < numberOfSphere; i++)
