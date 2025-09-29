@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ForDraw : MonoBehaviour
+public class Draw : MonoBehaviour
 {
    GameObject[] body;
    BodyProperty[] b;
    TrailRenderer[] trails;
    public Material[] material;
-   private int numberOfSphere = 20; // start small, add later
+   private int numberOfSphere = 200; // start small, add later
    private float timeflow = 0.1f;
    float radius = 10f;
    private const float G = 500f;
@@ -47,10 +47,10 @@ public class ForDraw : MonoBehaviour
 
            // trails
            trails[i] = body[i].AddComponent<TrailRenderer>();
-           trails[i].time = 2.0f;                   
+           trails[i].time = 1.0f;                   
            trails[i].startWidth = 0.5f;
            trails[i].endWidth = 0.0f;
-           // trails[i].material = new Material(Shader.Find("Sprite/Default"));
+           trails[i].material = new Material(Shader.Find("Sprite/Default"));
            // Gradient gradient = new Gradient();
            // gradient.SetKeys(
 
@@ -67,7 +67,7 @@ public class ForDraw : MonoBehaviour
 
            // adjust the mass
            b[i].mass = 1f;
-           b[i].velocity = Vector3.zero;
+        //    b[i].velocity = Vector3.zero;
            b[i].acceleration = Vector3.zero;
 
 
